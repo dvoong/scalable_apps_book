@@ -3,7 +3,9 @@ var app = express();
 var routes = require('./routes');
 
 var errorHandlers = require('./middleware/errorhandlers');
+var log = require('./middleware/log');
 
+app.use(log.logger);
 app.get('/', routes.index);
 app.get('/login', routes.login);
 app.post('/login', routes.loginProcess);
