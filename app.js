@@ -1,12 +1,17 @@
 var express = require('express');
 var app = express();
 var routes = require('./routes');
-
-app.set('view engine', 'ejs');
-
 var errorHandlers = require('./middleware/errorhandlers');
 var log = require('./middleware/log');
+var partials = require('express-partials');
 
+app.set('view engine', 'ejs');
+app.set('view options', {defaultLayout: 'layout'});
+
+// Middleware
+app.use(partials());
+
+// Routes
 app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
 app.get('/', routes.index);
@@ -16,8 +21,11 @@ app.get('/chat', routes.chat);
 app.get('/error', function(req, res, next){
     next(new Error('A contrived error'));
 });
+
+// Error Handlers
 app.use(errorHandlers.error);
 app.use(errorHandlers.notFound);
+
 
 app.listen(3000);
 console.log("App server running on port 3000");
