@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var routes = require('./routes');
 
+app.set('view engine', 'ejs');
+
 var errorHandlers = require('./middleware/errorhandlers');
 var log = require('./middleware/log');
 
