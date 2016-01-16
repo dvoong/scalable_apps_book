@@ -4,7 +4,12 @@ module.exports.loginProcess = loginProcess;
 module.exports.chat = chat;
 
 function index(req, res){
-    res.render('index', {title: 'Index'});
+    res.cookie('IndexCookie', 'This was set from Index');
+    res.render('index', {
+	title: 'Index',
+	cookie: JSON.stringify(req.cookies),
+	session: JSON.stringify(req.session)
+    });
 };
 
 function login(req, res){
