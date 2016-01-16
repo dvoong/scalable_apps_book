@@ -15,7 +15,7 @@ app.use(log.logger);
 app.use(express.static(__dirname + '/static'));
 app.use(partials());
 app.use(cookieParser());
-app.use(session());
+app.use(session({secret: 'secret'}))
 
 // Routes
 app.get('/', routes.index);
