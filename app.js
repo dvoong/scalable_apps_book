@@ -10,6 +10,7 @@ var RedisStore = require('connect-redis')(session);
 var bodyParser = require('body-parser');
 var csrf = require('csurf');
 var util = require('./middleware/utilities');
+var flash = require('connect-flash');
 
 app.set('view engine', 'ejs');
 app.set('view options', {defaultLayout: 'layout'});
@@ -32,6 +33,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(csrf());
 app.use(util.csrf);
 app.use(util.authenticated);
+app.use(flash());
 
 // Routes
 app.get('/', routes.index);

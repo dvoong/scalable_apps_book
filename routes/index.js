@@ -14,7 +14,7 @@ function index(req, res){
 };
 
 function login(req, res){
-    res.render('Login', {title: 'Login'});
+    res.render('Login', {title: 'Login', message: req.flash('error')});
 };
 
 function loginProcess(req, res){
@@ -22,6 +22,7 @@ function loginProcess(req, res){
     if(isAuth){
 	res.redirect('/chat');
     } else {
+	req.flash('error', 'Wrong Username or Password');
 	res.redirect('/login');
     }
 };
