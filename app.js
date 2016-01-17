@@ -8,6 +8,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session')
 var RedisStore = require('connect-redis')(session);
 var bodyParser = require('body-parser');
+var csrf = require('csurf');
+var util = require('./middleware/utilities');
 
 app.set('view engine', 'ejs');
 app.set('view options', {defaultLayout: 'layout'});
@@ -27,12 +29,15 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(csrf());
+app.use(util.csrf);
+app.use(util.authenticated);
 
 // Routes
 app.get('/', routes.index);
 app.get('/login', routes.login);
 app.post('/login', routes.loginProcess);
-app.get('/chat', routes.chat);
+app.get('/chat', [util.requireAuthentication], routes.chat);
 app.get('/error', function(req, res, next){
     next(new Error('A contrived error'));
 });

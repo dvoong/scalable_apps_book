@@ -1,3 +1,5 @@
+var util = require('../middleware/utilities');
+
 module.exports.index = index;
 module.exports.login = login;
 module.exports.loginProcess = loginProcess;
@@ -15,8 +17,12 @@ function login(req, res){
 };
 
 function loginProcess(req, res){
-    console.log(req.body);
-    res.send(req.body.username + ' ' + req.body.password);
+    var isAuth = util.auth(req.body.username, req.body.password, req.session);
+    if(isAuth){
+	res.redirect('/chat');
+    } else {
+	res.redirect('/login');
+    }
 };
 
 function chat(req, res){
