@@ -41,6 +41,7 @@ app.get('/chat', [util.requireAuthentication], routes.chat);
 app.get('/error', function(req, res, next){
     next(new Error('A contrived error'));
 });
+app.get('/logout', routes.logout);
 
 // Error Handlers
 app.use(errorHandlers.error);

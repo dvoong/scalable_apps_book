@@ -27,3 +27,8 @@ module.exports.auth = function auth(username, password, session){
     }
     return isAuth;
 };
+
+module.exports.logout = function logout(session){
+    session.isAuthenticated = false;
+    delete session.user;
+};

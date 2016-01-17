@@ -4,6 +4,7 @@ module.exports.index = index;
 module.exports.login = login;
 module.exports.loginProcess = loginProcess;
 module.exports.chat = chat;
+module.exports.logout = logout;
 
 function index(req, res){
     res.cookie('IndexCookie', 'This was set from Index');
@@ -28,3 +29,8 @@ function loginProcess(req, res){
 function chat(req, res){
     res.render('Chat', {title: 'Chat'});
 };
+
+function logout(req, res){
+    util.logout(req.session);
+    res.redirect('/');
+}
