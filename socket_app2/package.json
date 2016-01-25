@@ -1,0 +1,16 @@
+{
+  "name": "socket_app2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "namespace.js",
+  "scripts": {
+    "stop": "echo not implemented",
+    "start": "node ./namespace.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+      "socket.io": "1.0.6"
+  },
+  "author": "",
+  "license": "ISC"
+}

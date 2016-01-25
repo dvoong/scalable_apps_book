@@ -12,5 +12,8 @@ io.sockets.on('connection', function(socket){
 	done('ack');
     });
 
+    socket.on('disconnect', function(){
+	socket.broadcast.emit('userDisconnect', {username: socket.username})
+    });
 });
 
